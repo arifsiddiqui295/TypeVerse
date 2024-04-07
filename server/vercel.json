@@ -1,7 +1,6 @@
 {
-    "routes": [
-        { "/": "/" },
-        { "/leaderboard": "/leaderboard" },
-        { "/post": "/post" }
-    ]
+    "rewrites":[{
+        "source":"/(.*)",
+        "destination":"/"
+    }]
 }
