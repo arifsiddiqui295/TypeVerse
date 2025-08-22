@@ -7,7 +7,7 @@ const LeaderBoard = () => {
   const [rankings, setRankings] = useState()
   useEffect(() => {
     const getRankings = async () => {
-      const response = await axios.get('http://localhost:3000/leaderboard', {});
+      const response = await axios.get('https://typeverse-jwj9.onrender.com/leaderboard', {});
       // console.log(response.data)
       setRankings(response.data)
       console.log('rankings ', rankings)

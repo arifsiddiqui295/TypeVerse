@@ -1,9 +1,27 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../models/Users.js");
-router.post('/',(req,res,next)=>{
-  res.json("hello")
-})
+
+router.get("/users", (req, res, next) => {
+  console.log("eheh");
+  res.status(200).json({ message: "User received" });
+});
+
+router.post("/hello", (req, res) => {
+  console.log(req.body); // Check if request data is received
+  if (!req.body) {
+    res.json({ message: "Student added successfully!", student: req.body });
+  }
+  res.json({ message: "Student added successfully!", student: req.body });
+});
+
+router.post("/", (req, res, next) => {
+  console.log(req.body);
+    if (!req.body) {
+    res.json({ message: "Student added successfully!", student: req.body });
+  }
+  res.json({ message: "Student added successfully!", student: req.body });
+});
 router.post("/post", async (req, res, next) => {
   // res.send("hlllo")
   const { username, password, speed } = req.body;
@@ -69,10 +87,10 @@ router.post("/update", async (req, res) => {
 router.get("/leaderboard", async (req, res, next) => {
   try {
     const users = await Users.find();
-    const arr =[] // Extract speeds from users
-    users.forEach((value,index)=>{
-      arr[index]=value.speed;
-    })
+    const arr = []; // Extract speeds from users
+    users.forEach((value, index) => {
+      arr[index] = value.speed;
+    });
     arr.sort((a, b) => a - b);
     arr.reverse();
     const sendUser = await Promise.all(
@@ -83,7 +101,7 @@ router.get("/leaderboard", async (req, res, next) => {
     );
     console.log(arr);
     // console.log("send User",sendUser);
-  res.send(sendUser); 
+    res.send(sendUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
